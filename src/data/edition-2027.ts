@@ -14,7 +14,7 @@ export const edition2027 = {
      Troque endereço, texto, foto e mapa a cada edição.
      Mapa: o formato q=...&output=embed do Google Maps dispensa API key para este uso simples. */
   venueAddress: 'Avenida Ipiranga, 6681, Partenon — Porto Alegre, RS',
-  venueDescription: 'Replace with a short description of the venue, accessibility, main facilities and why it is convenient for conference attendees. Recommended: 60–120 words.',
+  venueDescription: 'The main campus of PUCRS (Pontifical Catholic University of Rio Grande do Sul) covers more than 55 hectares in the Partenon district of Porto Alegre. Alongside its schools and central library, it hosts the PUCRS Museum of Science and Technology, the Tecnopuc science and technology park and the PUCRS Events Center (building 41), one of the largest in southern Brazil. Hospital São Lucas da PUCRS is on the north block of the campus, across Avenida Ipiranga. The campus has restaurants and cafés, paid parking with more than 6,000 spaces, and city buses along Avenida Ipiranga and Avenida Bento Gonçalves.',
   venuePhoto: '/assets/2027/venue-pucrs.jpg',
   mapEmbedUrl: 'https://www.google.com/maps?q=PUCRS%2C%20Avenida%20Ipiranga%206681%2C%20Porto%20Alegre&output=embed',
 

@@ -5,18 +5,18 @@ import { edition2027 as edition } from '../../data/edition-2027';
 import { withBase } from '../../utils/paths';
 
 const accommodation = [
-  { title: 'Hotel Option 1', text: 'Area / distance from venue · negotiated rate or booking note placeholder.' },
-  { title: 'Hotel Option 2', text: 'Area / distance from venue · category and booking note placeholder.' },
-  { title: 'Hotel Option 3', text: 'Area / distance from venue · category and booking note placeholder.' },
+  { title: 'Charlie Connect PUC', text: 'Partenon · approx. 250 m from PUCRS · Studio aparthotel with kitchen, pool and coworking.', href: 'https://www.staycharlie.com.br/en/charlie-connect-partenon' },
+  { title: 'Coral Trade & Eventos', text: 'Petrópolis · approx. 3 km from PUCRS · Mid-range business hotel on Avenida Protásio Alves.', href: 'https://www.coraltower.com.br/petropolis/' },
+  { title: 'Novotel Porto Alegre Três Figueiras', text: 'Três Figueiras · approx. 4.5 km from PUCRS · 4-star Accor hotel on Avenida Soledade.', href: 'https://all.accor.com/hotel/3258/index.en.shtml' },
 ];
 const dining = [
-  { title: 'Restaurant Option 1', text: 'Cuisine · distance from venue · opening-hours note placeholder.' },
-  { title: 'Restaurant Option 2', text: 'Cuisine · distance from venue · dietary options placeholder.' },
-  { title: 'Restaurant Option 3', text: 'Cuisine · neighborhood / practical note placeholder.' },
+  { title: 'Panorama Gastronômico', text: 'Brazilian buffet (grill, sushi, salads) · on campus, building 41 (Events Center) · Lunch.', href: 'https://www.google.com/maps/search/?api=1&query=Panorama+Gastron%C3%B4mico+PUCRS+Porto+Alegre' },
+  { title: 'Restaurante Universitário (RU)', text: 'University cafeteria · on campus, building 3 · Budget meals on weekdays; closed on weekends.', href: 'https://www.google.com/maps/search/?api=1&query=Restaurante+Universit%C3%A1rio+PUCRS+Porto+Alegre' },
+  { title: 'Coollab Coffee', text: 'Coffee and snacks · on campus, building 41 (Events Center) · Open from early morning to late evening.', href: 'https://www.google.com/maps/search/?api=1&query=Coollab+Coffee+PUCRS+Pr%C3%A9dio+41+Porto+Alegre' },
 ];
 const hospitals = [
-  { title: 'Hospital / Emergency Option 1', text: 'Address · approximate distance · emergency service note placeholder.' },
-  { title: 'Hospital / Emergency Option 2', text: 'Address · approximate distance · service note placeholder.' },
+  { title: 'Hospital São Lucas da PUCRS', text: 'Av. Ipiranga, 6690 · on the north block of the campus · 24-hour adult emergency for private patients and health insurance holders.', href: 'https://www.google.com/maps/search/?api=1&query=Hospital+S%C3%A3o+Lucas+da+PUCRS%2C+Av.+Ipiranga+6690%2C+Porto+Alegre' },
+  { title: 'Hospital de Pronto Socorro (HPS)', text: 'Largo Teodoro Herzl, Bom Fim · approx. 6 km from PUCRS · Public 24-hour emergency hospital, reference for trauma.', href: 'https://www.google.com/maps/search/?api=1&query=Hospital+de+Pronto+Socorro%2C+Largo+Teodoro+Herzl%2C+Porto+Alegre' },
 ];
 ---
 <EditionLayout edition={edition} activePage="attending" title="Attending">
@@ -33,7 +33,7 @@ const hospitals = [
     <div class="container">
       <div class="section__heading">
         <h2>Venue</h2>
-        <p>The location should be immediately understandable: photo, map, name, address and a short practical description.</p>
+        <p>BRACIS 2027 takes place on the main campus of PUCRS in Porto Alegre. The conference building will be announced closer to the event.</p>
       </div>
       <div class="venue-grid">
         <div class="venue-media">
@@ -56,11 +56,11 @@ const hospitals = [
     <div class="container">
       <div class="section__heading">
         <h2>Getting to the City</h2>
-        <p>Give participants the two most common arrival routes and only the information needed to make a travel decision.</p>
+        <p>Most participants arrive by plane at Salgado Filho International Airport. Intercity and international buses arrive at the central bus station.</p>
       </div>
       <div class="grid grid--2">
-        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="plane" /></span><h3>By Plane</h3></div><p>Nearest airport, airport code, approximate distance/time to the central area and key domestic connections placeholder.</p></article>
-        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="bus" /></span><h3>By Bus</h3></div><p>Main intercity bus terminal, routes commonly used by attendees and approximate distance/time to the venue placeholder.</p></article>
+        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="plane" /></span><h3>By Plane</h3></div><p>Salgado Filho International Airport (POA) is about 10 km from PUCRS, roughly 15–30 minutes by car depending on traffic. It has direct flights from São Paulo (GRU and CGH), Rio de Janeiro, Brasília and other Brazilian cities, and international routes such as Buenos Aires, Santiago, Lima, Panama City and Lisbon.</p></article>
+        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="bus" /></span><h3>By Bus</h3></div><p>Intercity, interstate and international buses arrive at the Estação Rodoviária de Porto Alegre, in the historic centre (Largo Vespasiano Júlio Veppo, 70). PUCRS is about 8 km away: around 15–20 minutes by car or 35 minutes by city bus.</p></article>
       </div>
     </div>
   </section>
@@ -69,12 +69,12 @@ const hospitals = [
     <div class="container">
       <div class="section__heading">
         <h2>Getting to the Venue</h2>
-        <p>Replace with a brief orientation on the safest and most practical ways to reach the venue, including typical travel times when useful.</p>
+        <p>The main entrance is on Avenida Ipiranga, with another entrance on Avenida Bento Gonçalves. From the airport, a taxi or ride-hailing app is the most practical option, as there is no direct bus to the campus.</p>
       </div>
       <div class="grid grid--3">
-        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="taxi" /></span><h3>Ride-hailing / Taxi Apps</h3></div><p>Recommended apps, official taxi information, pickup/drop-off point and approximate travel-time placeholder.</p></article>
-        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="bus" /></span><h3>Bus</h3></div><p>Useful lines/stops, payment method, frequency and walking distance from the closest stop placeholder.</p></article>
-        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="car" /></span><h3>Car Rental</h3></div><p>Rental guidance, parking availability/cost and any access restrictions around the venue placeholder.</p></article>
+        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="taxi" /></span><h3>Ride-hailing / Taxi Apps</h3></div><p>Uber, 99 and inDrive operate in Porto Alegre. At the airport, app pickups are in front of arrivals, and taxis are also available. The ride to PUCRS takes about 15–30 minutes.</p></article>
+        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="bus" /></span><h3>Bus</h3></div><p>Lines 343 (Campus/Ipiranga) and 353 (Ipiranga/PUC/UFRGS) connect the city centre to PUCRS along Avenida Ipiranga, stopping in front of the main entrance. Pay in cash on board or with the rechargeable TRI card.</p></article>
+        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="car" /></span><h3>Car Rental</h3></div><p>Rental companies such as Localiza have desks at the airport. PUCRS has paid parking with more than 6,000 spaces, open to visitors from 06:00 to 23:00, with payment at self-service kiosks.</p></article>
       </div>
     </div>
   </section>
@@ -83,11 +83,11 @@ const hospitals = [
     <div class="container">
       <div class="section__heading">
         <h2>Leaving the Venue</h2>
-        <p>Use this area for evening transport guidance, pickup points and any details that differ after conference hours.</p>
+        <p>After the evening sessions, the main entrance on Avenida Ipiranga is the most convenient place to catch a ride or a bus.</p>
       </div>
       <div class="grid grid--2">
-        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="taxi" /></span><h3>Ride-hailing / Taxi Apps</h3></div><p>Designated pickup location, practical safety guidance and expected availability after the final sessions placeholder.</p></article>
-        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="bus" /></span><h3>Bus</h3></div><p>Last useful departures, nearest stop and links to official public-transport information placeholder.</p></article>
+        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="taxi" /></span><h3>Ride-hailing / Taxi Apps</h3></div><p>Request rides to the main entrance on Avenida Ipiranga (Av. Ipiranga, 6681). Check that the plate and driver match the app before getting in, and avoid hailing taxis on the street.</p></article>
+        <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="bus" /></span><h3>Bus</h3></div><p>Lines 343 and 353 run along Avenida Ipiranga back to the city centre into the evening. Check the last departures in the official EPTC timetables before the final sessions.</p></article>
       </div>
     </div>
   </section>
@@ -96,9 +96,9 @@ const hospitals = [
     <div class="container">
       <div class="section__heading">
         <h2>Accommodation</h2>
-        <p>Briefly explain recommended areas and identify official/negotiated conference rates when available.</p>
+        <p>There is no hotel on the campus. The options below are close to PUCRS or a short ride away.</p>
       </div>
-      <div class="grid grid--3">{accommodation.map((item)=><article class="card option-card"><div class="card__title"><span class="card-icon"><Icon name="hotel" /></span><h3>{item.title}</h3></div><p>{item.text}</p><a class="text-link" href="#">Hotel website <Icon name="external" size={15}/></a></article>)}</div>
+      <div class="grid grid--3">{accommodation.map((item)=><article class="card option-card"><div class="card__title"><span class="card-icon"><Icon name="hotel" /></span><h3>{item.title}</h3></div><p>{item.text}</p><a class="text-link" href={item.href}>Hotel website <Icon name="external" size={15}/></a></article>)}</div>
     </div>
   </section>
 
@@ -106,9 +106,9 @@ const hospitals = [
     <div class="container">
       <div class="section__heading">
         <h2>Nearby Dining</h2>
-        <p>Prioritize options close to the venue and include dietary information when it is genuinely useful.</p>
+        <p>The campus has restaurants, cafés and a university cafeteria. Opening hours vary, and some places close on weekends.</p>
       </div>
-      <div class="grid grid--3">{dining.map((item)=><article class="card option-card"><div class="card__title"><span class="card-icon"><Icon name="dining" /></span><h3>{item.title}</h3></div><p>{item.text}</p><a class="text-link" href="#">Directions <Icon name="external" size={15}/></a></article>)}</div>
+      <div class="grid grid--3">{dining.map((item)=><article class="card option-card"><div class="card__title"><span class="card-icon"><Icon name="dining" /></span><h3>{item.title}</h3></div><p>{item.text}</p><a class="text-link" href={item.href}>Directions <Icon name="external" size={15}/></a></article>)}</div>
     </div>
   </section>
 
@@ -116,9 +116,9 @@ const hospitals = [
     <div class="container">
       <div class="section__heading">
         <h2>Hospitals &amp; Emergencies</h2>
-        <p>List only reliable emergency options and the relevant local emergency numbers.</p>
+        <p>In an emergency, call SAMU (ambulance) 192, the fire brigade 193 or the police 190. The PUCRS campus security emergency line is +55 51 3320-3600.</p>
       </div>
-      <div class="grid grid--2">{hospitals.map((item)=><article class="card option-card"><div class="card__title"><span class="card-icon"><Icon name="hospital" /></span><h3>{item.title}</h3></div><p>{item.text}</p><a class="text-link" href="#">Open map <Icon name="external" size={15}/></a></article>)}</div>
+      <div class="grid grid--2">{hospitals.map((item)=><article class="card option-card"><div class="card__title"><span class="card-icon"><Icon name="hospital" /></span><h3>{item.title}</h3></div><p>{item.text}</p><a class="text-link" href={item.href}>Open map <Icon name="external" size={15}/></a></article>)}</div>
     </div>
   </section>
 </EditionLayout>
