@@ -33,7 +33,7 @@ export const edition2027 = {
   /* LOGO ANUAL
      SVG é preferível. Para PNG: fundo transparente, 1600×700 px recomendado,
      mínimo 1200 px de largura e idealmente até ~700 KB. */
-  editionLogo: '/assets/2027/bracis-2027-logo.png',
+  editionLogo: '/assets/2027/bracis-2027-logo.svg',
   editionLogoAlt: 'BRACIS 2027 edition logo',
 
   registration: {
