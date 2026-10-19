@@ -1,0 +1,102 @@
+---
+import EditionLayout from '../../../layouts/EditionLayout.astro';
+import Icon from '../../../components/Icon.astro';
+import { edition2026 as edition } from '../../../data/edition-2026';
+import { subevents2026 } from '../../../data/subevents-2026';
+
+export function getStaticPaths() {
+  return subevents2026.map((event) => ({ params: { slug: event.slug }, props: { event } }));
+}
+
+const { event } = Astro.props;
+---
+<EditionLayout edition={edition} activePage="events" title={event.acronym} description={`${event.acronym} — ${event.subtitle}`}>
+  <!-- BANNER DO SUB-EVENTO
+       Sigla: idealmente até 12 caracteres. Subtítulo: 50–120 caracteres.
+       Data/local: mantenha em uma linha curta sempre que possível.
+       A sigla é o H1 desta página; as seções abaixo usam H2. -->
+  <section class="subevent-hero">
+    <div class="container subevent-hero__inner">
+      <div>
+        <p class="section-kicker">BRACIS {edition.year} · Event &amp; Call for Papers</p>
+        <h1>{event.acronym}</h1>
+        <p class="subevent-hero__subtitle">{event.subtitle}</p>
+      </div>
+      <div class="subevent-hero__meta">
+        <span><Icon name="calendar" size={20} /> <strong>{event.date}</strong></span>
+        <span><Icon name="pin" size={20} /> {event.location}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__heading"><h2>About</h2></div>
+      <!-- ABOUT: 120–220 palavras. -->
+      <div class="prose"><p>{event.about}</p></div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__heading"><h2>Call for Papers</h2></div>
+      <!-- CFP: use texto escaneável; prefira subtítulos/listas para regras extensas. -->
+      <div class="prose"><p>{event.callForPapers}</p><p><a class="btn btn--primary" href="#">Official call / submission system →</a></p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__heading"><h2>Topics of Interest</h2><p>Add, remove or reorder topics according to the sub-event scope.</p></div>
+      <!-- TOPICS: mantenha rótulos curtos. Ícones foram removidos de propósito para evitar ruído visual repetitivo. -->
+      <div class="topic-list">{event.topics.map((topic) => <span class="topic">{topic}</span>)}</div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="grid grid--2">
+        <article class="section-panel">
+          <div class="section__heading"><h2>Submission</h2></div>
+          <!-- Inclua formato, limite de páginas, idioma, template e plataforma. -->
+          <div class="prose"><p>{event.submission}</p><a class="text-link" href="#">Submission platform <Icon name="external" size={15} /></a></div>
+        </article>
+        <article class="section-panel">
+          <div class="section__heading"><h2>Decision Process</h2></div>
+          <div class="prose"><p>{event.decisionProcess}</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__heading"><h2>Publication - Selected Works</h2></div>
+      <div class="prose"><p>{event.publication}</p></div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__heading"><h2>Important Dates</h2><p>Use the same timezone convention for every deadline; AoE is recommended when applicable.</p></div>
+      <div class="timeline">{event.dates.map((item) => <div class="timeline__item"><div class="timeline__date">{item.date}</div><div><strong>{item.title}</strong><span>{item.note}</span></div></div>)}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__heading"><h2>Event Chairs</h2><p>Use one square portrait per chair. Keep crop and background style consistent.</p></div>
+      <!-- FOTOS DOS CHAIRS: 600×600 px, JPG/WebP, idealmente até 180 KB. -->
+      <div class="people-grid people-grid--3">
+        {event.chairs.map((chair) => <article class="person-card"><div class="person-card__photo" aria-label="Photo placeholder"><span>PHOTO<br/>600×600</span></div><div class="person-card__body"><h3>{chair.name}</h3><p>{chair.institution}</p></div></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__heading"><h2>Contact Information</h2></div>
+      <div class="contact-panel"><span class="card-icon"><Icon name="mail" /></span><div><h3>Email</h3><p>Questions about this sub-event should be sent to <a class="text-link text-link--inline" href={`mailto:${event.contactEmail}`}>{event.contactEmail}</a>.</p></div></div>
+    </div>
+  </section>
+</EditionLayout>

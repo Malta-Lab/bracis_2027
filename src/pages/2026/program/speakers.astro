@@ -1,0 +1,9 @@
+---
+import EditionLayout from '../../../layouts/EditionLayout.astro';
+import { edition2026 as edition } from '../../../data/edition-2026';
+const speakers = Array.from({length:4},(_,i)=>({name:`Speaker ${i+1}`,affiliation:'Institution · Country',talk:'Talk title placeholder'}));
+---
+<EditionLayout edition={edition} activePage="program" title="Speakers">
+  <section class="page-intro section"><div class="container"><p class="section-kicker">Program · Invited program</p><h1>Speakers</h1><p class="lead">Introduce keynote and invited speakers here. Prioritize person, talk title, affiliation and schedule.</p></div></section>
+  <section class="section section--alt"><div class="container"><div class="section__heading"><h2>Keynote &amp; Invited Speakers</h2><p>Use consistent portraits and keep biographies concise on the listing page.</p></div><div class="speaker-grid">{speakers.map((speaker)=><article class="speaker-card"><div class="speaker-card__photo" aria-hidden="true">PHOTO<br/>800×800</div><div class="speaker-card__body"><span class="card__eyebrow">Keynote speaker</span><h3>{speaker.name}</h3><p class="speaker-card__affiliation">{speaker.affiliation}</p><h4>{speaker.talk}</h4><p><!-- FOTO: 800×800 px, WebP/JPG, até ~250 KB. -->Short bio placeholder, recommended 300–500 characters.</p><a class="text-link" href="#">Speaker details →</a></div></article>)}</div></div></section>
+</EditionLayout>

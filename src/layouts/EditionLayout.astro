@@ -1,0 +1,104 @@
+---
+import GlobalLayout from './GlobalLayout.astro';
+import Icon from '../components/Icon.astro';
+import { withBase } from '../utils/paths';
+const { edition, activePage = 'home', title, description } = Astro.props;
+const pageTitle = title ? `${title} — BRACIS ${edition.year}` : `BRACIS ${edition.year}`;
+const pageDescription = description ?? `${edition.conferenceName}, ${edition.city}, ${edition.country}.`;
+const currentPath = Astro.url.pathname;
+---
+<GlobalLayout title={pageTitle} description={pageDescription} edition={edition.year}>
+  <!-- CABEÇALHO PADRÃO DA EDIÇÃO
+       Os dados compartilhados vêm de src/data/edition-AAAA.ts.
+       O banner usa um degradê de DUAS CORES configurável por edição e não usa foto. -->
+  <header
+    class="edition-hero"
+    style={`--edition-accent:${edition.accentColor}; --edition-gradient-start:${edition.heroGradientStart}; --edition-gradient-end:${edition.heroGradientEnd};`}
+  >
+    <div class="container edition-hero__grid">
+      <div class="edition-hero__info">
+        {activePage === 'home' ? (
+          <h1 class="edition-hero__title">{edition.conferenceName}</h1>
+        ) : (
+          <p class="edition-hero__title">{edition.conferenceName}</p>
+        )}
+        <div class="edition-hero__meta">
+          <p><Icon name="pin" size={18} /><strong>{edition.city}, {edition.state}, {edition.country}</strong></p>
+          <p><Icon name="calendar" size={18} />{edition.dates}</p>
+          <p><Icon name="building" size={18} />{edition.venue}</p>
+        </div>
+      </div>
+
+      <div class="edition-hero__brand">
+        <!-- LOGO ANUAL: SVG preferido; PNG transparente 1600×700 px recomendado.
+             O card em glassmorphism é deliberadamente quase branco para garantir legibilidade. -->
+        <a class="edition-logo-card" href={withBase(`/${edition.year}/`)} aria-label={`BRACIS ${edition.year} home`}>
+          <img src={withBase(edition.editionLogo)} alt={edition.editionLogoAlt} width="460" height="190" loading="eager" decoding="async" />
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MENU 2 — MENU ESPECÍFICO DA EDIÇÃO
+       Itens com filhos são dropdowns. O pai serve apenas como agrupador e NÃO possui página própria. -->
+  <div class="edition-nav" style={`--edition-accent:${edition.accentColor};`}>
+    <div class="container edition-nav__inner">
+      <div class="edition-nav__links-wrap">
+        <a class={`edition-home-link ${activePage === 'home' ? 'is-active' : ''}`} href={withBase(`/${edition.year}/`)} aria-label={`BRACIS ${edition.year} edition home`}>
+          <span>Home</span>
+        </a>
+        <nav aria-label={`BRACIS ${edition.year} edition navigation`}>
+          <ul class="edition-links">
+            {edition.nav.map((item) => (
+              <li class={item.children ? 'edition-links__dropdown' : ''}>
+                {item.children ? (
+                  <details class="nav-dropdown" open={activePage === item.key}>
+                    <summary class={activePage === item.key ? 'is-active' : ''}>
+                      <span>{item.label}</span>
+                      <Icon name="chevron" size={15} class="nav-dropdown__chevron" />
+                    </summary>
+                    <div class="nav-dropdown__panel">
+                      {item.children.map((child) => (
+                        <a href={withBase(child.href)} class={currentPath === withBase(child.href) ? 'is-current' : ''} aria-current={currentPath === withBase(child.href) ? 'page' : undefined}>
+                          <span>{child.label}</span>
+                          {child.description && <small>{child.description}</small>}
+                        </a>
+                      ))}
+                    </div>
+                  </details>
+                ) : (
+                  <a class={activePage === item.key ? 'is-active' : ''} href={withBase(item.href)} aria-current={activePage === item.key ? 'page' : undefined}>
+                    <span>{item.label}</span>
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      <div class="registration-status" aria-label="Registration status">
+        <Icon name="calendar" size={20} class="registration-status__icon" />
+        <div class="registration-status__copy">
+          <span class="registration-status__label">{edition.registration.statusTitle}</span>
+          <span class="registration-status__detail">{edition.registration.statusDetail}</span>
+        </div>
+        <a class="btn btn--primary btn--compact" href={withBase(edition.registration.ctaHref)}>{edition.registration.ctaLabel} →</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="content" style={`--edition-accent:${edition.accentColor};`}><slot /></main>
+
+  <script is:inline>
+    // Close one edition dropdown when another is opened, keeping the navigation compact.
+    document.querySelectorAll('.edition-nav details').forEach((details) => {
+      details.addEventListener('toggle', () => {
+        if (!details.open) return;
+        document.querySelectorAll('.edition-nav details[open]').forEach((other) => {
+          if (other !== details) other.removeAttribute('open');
+        });
+      });
+    });
+  </script>
+</GlobalLayout>

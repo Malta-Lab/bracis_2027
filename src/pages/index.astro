@@ -1,0 +1,44 @@
+---
+import GlobalLayout from '../layouts/GlobalLayout.astro';
+import Icon from '../components/Icon.astro';
+import { withBase } from '../utils/paths';
+const editions = [
+  { year: '2027', status: 'Current edition', city: 'Porto Alegre, RS, Brazil', href: '/2027/', external: false },
+  { year: '2026', status: 'Previous edition', city: 'Cuiabá, MT, Brazil', href: '/2026/', external: false },
+  { year: '2025', status: 'Previous edition', city: 'Fortaleza, CE, Brazil', href: 'https://bracis.sbc.org.br/2025/', external: true },
+  { year: '2024', status: 'Previous edition', city: 'Belém, PA, Brazil', href: 'https://bracis.sbc.org.br/2024/', external: true },
+  { year: '2023', status: 'Previous edition', city: 'Belo Horizonte, MG, Brazil', href: 'https://www.bracis.dcc.ufmg.br/', external: true }
+];
+---
+<GlobalLayout title="BRACIS — Brazilian Conference on Intelligent Systems" description="Official home of the Brazilian Conference on Intelligent Systems.">
+  <main id="content">
+    <section class="hero hero--dark" style="--hero-image: linear-gradient(125deg, #292b2e, #151617);">
+      <div class="container hero__content">
+        <div class="eyebrow">Brazilian Conference on Intelligent Systems</div>
+        <h1>Intelligence, research &amp; new possibilities.</h1>
+        <p class="hero__meta">The BRACIS brings together the Brazilian community working with Artificial and Computational Intelligence, connecting research, applications and people.</p>
+        <div class="hero__actions"><a class="btn btn--primary" href={withBase('/2027/')}>Explore BRACIS 2027</a><a class="btn btn--secondary" href="#editions">Past editions</a></div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section__heading"><h2>A conference with a history in Brazilian AI.</h2><p>BRACIS originated from the combination of the Brazilian Symposium on Artificial Intelligence (SBIA) and the Brazilian Symposium on Neural Networks (SBRN). The event promotes theoretical and applied advances in Artificial and Computational Intelligence.</p></div>
+        <div class="grid grid--3">
+          <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="file" /></span><h3>Research</h3></div><p>Original scientific contributions and emerging methods in AI and Computational Intelligence.</p></article>
+          <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="check" /></span><h3>Applications</h3></div><p>Connections between methods, real-world problems and multidisciplinary applications.</p></article>
+          <article class="card visual-card"><div class="card__title"><span class="card-icon"><Icon name="users" /></span><h3>Community</h3></div><p>A meeting point for researchers, students, practitioners and institutions.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="editions">
+      <div class="container">
+        <div class="section__heading"><h2>Editions</h2><p>Each new edition can live inside the same BRACIS domain, using a consistent information architecture while retaining its own visual identity.</p></div>
+        <div class="grid grid--2">
+          {editions.map((edition) => <article class="card archive-card"><div><div class="archive-card__year">{edition.year}</div><div class="archive-card__location"><Icon name="pin" size={17}/>{edition.status} · {edition.city}</div></div><div class="archive-card__links"><a class="btn btn--primary" href={withBase(edition.href)} target={edition.external ? '_blank' : undefined} rel={edition.external ? 'noopener' : undefined}>{edition.external ? 'Open edition ↗' : 'Open edition'}</a></div></article>)}
+        </div>
+      </div>
+    </section>
+  </main>
+</GlobalLayout>

@@ -1,0 +1,101 @@
+---
+import '../styles/global.css';
+import { withBase } from '../utils/paths';
+const { title = 'BRACIS — Brazilian Conference on Intelligent Systems', description = 'Brazilian Conference on Intelligent Systems', edition = '2027', current = false } = Astro.props;
+const editions = [
+  { year: '2027', href: '/2027/', external: false },
+  { year: '2026', href: '/2026/', external: false },
+  { year: '2025', href: 'https://bracis.sbc.org.br/2025/', external: true },
+  { year: '2024', href: 'https://bracis.sbc.org.br/2024/', external: true },
+  { year: '2023', href: 'https://www.bracis.dcc.ufmg.br/', external: true }
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <header class="global-nav">
+      <div class="container global-nav__inner">
+        <!-- LOGO GERAL: substitua o marcador abaixo pelo SVG/PNG oficial da BRACIS. Recomendado: SVG horizontal, até 180×48 px. -->
+        <a class="brand" href={withBase('/')} aria-label="BRACIS — home">
+          <img
+            src={withBase('/assets/logo-bracis-branca.svg')}
+            alt="BRACIS — Brazilian Conference on Intelligent Systems"
+            class="brand-logo"
+          />
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="global-menu">Menu</button>
+        <nav id="global-menu" aria-label="BRACIS global navigation">
+          <ul class="global-links">
+            <li><a href={withBase('/#about')}>About BRACIS</a></li>
+            <li><a href={withBase('/#editions')}>Editions</a></li>
+            <li><a href="https://www.sbc.org.br/" target="_blank" rel="noopener">SBC ↗</a></li>
+            <li><a href={withBase('/#contact')}>Contact</a></li>
+          </ul>
+        </nav>
+        <div class="year-picker">
+          <label for="year">Edition</label>
+          <select id="year" aria-label="Select BRACIS edition">
+            <option value="" selected>Select year</option>
+            {editions.map((item) => <option value={withBase(item.href)} data-external={item.external ? 'true' : 'false'}>{item.year}</option>)}
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <script is:inline>
+      const menuButton = document.querySelector('.menu-toggle');
+      const menu = document.querySelector('.global-links');
+
+      menuButton?.addEventListener('click', () => {
+        const open = menu.classList.toggle('is-open');
+        menuButton.setAttribute('aria-expanded', String(open));
+      });
+
+      document.querySelector('#year')?.addEventListener('change', (event) => {
+        const select = event.target;
+        const option = select.selectedOptions[0];
+
+        if (!option?.value) return;
+
+        if (option.dataset.external === 'true') {
+          window.open(option.value, '_blank', 'noopener');
+          select.value = '';
+        } else {
+          window.location.href = option.value;
+        }
+      });
+    </script>
+
+    <slot />
+
+    <footer class="footer" id="contact">
+      <div class="container">
+        <div class="footer__grid">
+          <div>
+            <h2>BRACIS</h2>
+            <p>Brazilian Conference on Intelligent Systems: a recurring scientific event dedicated to Artificial and Computational Intelligence.</p>
+          </div>
+          <div>
+            <h3>About</h3>
+            <p><a href={withBase('/#about')}>The conference</a><br /><a href={withBase('/#editions')}>Past editions</a></p>
+          </div>
+          <div>
+            <h3>External links</h3>
+            <p><a href="https://www.sbc.org.br/" target="_blank" rel="noopener">Brazilian Computer Society (SBC) ↗</a><br /><a href="mailto:bracis@sbc.org.br">bracis@sbc.org.br</a></p>
+          </div>
+        </div>
+        <div class="footer__bottom">© {new Date().getFullYear()} BRACIS.</div>
+      </div>
+    </footer>
+  </body>
+</html>

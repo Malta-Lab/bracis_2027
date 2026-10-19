@@ -1,0 +1,27 @@
+---
+import EditionLayout from '../../layouts/EditionLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { edition2027 as edition } from '../../data/edition-2027';
+const organizers = [
+  { name: 'Organizer Name 1', role: 'General Chair', institution: 'Institution / University' },
+  { name: 'Organizer Name 2', role: 'General Chair', institution: 'Institution / University' },
+  { name: 'Organizer Name 3', role: 'Program Chair', institution: 'Institution / University' },
+  { name: 'Organizer Name 4', role: 'Program Chair', institution: 'Institution / University' },
+  { name: 'Organizer Name 5', role: 'Local Organization Chair', institution: 'Institution / University' },
+  { name: 'Organizer Name 6', role: 'Publicity Chair', institution: 'Institution / University' },
+  { name: 'Organizer Name 7', role: 'Proceedings Chair', institution: 'Institution / University' },
+  { name: 'Organizer Name 8', role: 'Web / Communication Chair', institution: 'Institution / University' },
+];
+---
+<EditionLayout edition={edition} activePage="organization" title="Organization">
+  <section class="page-intro section"><div class="container"><p class="section-kicker">Conference team</p><h1>Organization</h1><p class="lead">Present the people responsible for the edition with consistent portraits, role names and institutional affiliations.</p></div></section>
+
+  <section class="section section--alt"><div class="container"><div class="section__heading"><h2>Organizing Committee</h2><p>Use the same crop, lighting and background treatment for all portraits whenever possible.</p></div>
+    <!-- FOTOS DOS ORGANIZADORES: 600×600 px, JPG/WebP, idealmente ≤180 KB. -->
+    <div class="people-grid people-grid--4">{organizers.map((person)=><article class="person-card"><div class="person-card__photo" aria-label="Photo placeholder"><span>PHOTO<br/>600×600</span></div><div class="person-card__body"><span class="person-card__role">{person.role}</span><h3>{person.name}</h3><p>{person.institution}</p></div></article>)}</div>
+  </div></section>
+
+  <section class="section"><div class="container"><div class="section__heading"><h2>Program Committee</h2><p>For long committees, use an alphabetical text list instead of a portrait card for every member.</p></div><div class="name-columns">{Array.from({length:18},(_,i)=><span>Member {i+1} — Institution</span>)}</div></div></section>
+
+  <section class="section section--alt"><div class="container"><div class="section__heading"><h2>Contact</h2></div><div class="contact-panel"><span class="card-icon"><Icon name="mail" /></span><div><h3>Email</h3><p>Edition contact email: <a class="text-link text-link--inline" href="mailto:edition-email@example.org">edition-email@example.org</a></p></div></div></div></section>
+</EditionLayout>

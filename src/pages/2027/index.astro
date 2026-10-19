@@ -1,0 +1,105 @@
+---
+import EditionLayout from '../../layouts/EditionLayout.astro';
+import { edition2027 as edition } from '../../data/edition-2027';
+import { withBase } from '../../utils/paths';
+const cityPhotos = [
+  /* FOTOS DA CIDADE: JPG/WebP 1600×1000 px (8:5), idealmente até 350 KB cada.
+     Use 3–6 fotos horizontais, sem texto embutido e com autorização de uso. */
+  { src: '/assets/2027/city-1-placeholder.svg', alt: 'Replace with a host city landmark photo' },
+  { src: '/assets/2027/city-2-placeholder.svg', alt: 'Replace with a host city culture or nature photo' },
+  { src: '/assets/2027/city-3-placeholder.svg', alt: 'Replace with a host city urban or venue-area photo' },
+];
+const sponsorGroups = [
+  { title: 'Promotion', size: 'medium', logos: ['Institution / logo'] },
+  { title: 'Organized by', size: 'medium', logos: ['Institution / logo', 'Institution / logo'] },
+  { title: 'Supporting Agency', size: 'medium', logos: ['Institution / logo'] },
+  { title: 'Institutional Support', size: 'small', logos: ['Institution / logo', 'Institution / logo'] },
+  { title: 'Platinum Sponsor', size: 'large', logos: ['Sponsor / logo'] },
+  { title: 'Elite Sponsor', size: 'medium', logos: ['Sponsor / logo', 'Sponsor / logo'] },
+  { title: 'Premium Sponsor', size: 'small', logos: ['Sponsor / logo', 'Sponsor / logo', 'Sponsor / logo'] },
+];
+---
+<EditionLayout edition={edition} activePage="home">
+  <section class="section city-section">
+    <div class="container">
+      <div class="section__heading section__heading--wide"><p class="section-kicker">Host city</p><h2>Welcome to {edition.city}</h2></div>
+      <div class="city-intro-grid">
+        <div class="city-carousel" data-carousel aria-label={`Photos of ${edition.city}`}>
+          <div class="city-carousel__viewport">
+            {cityPhotos.map((photo, index) => <figure class={`city-carousel__slide ${index === 0 ? 'is-active' : ''}`} data-slide aria-hidden={index === 0 ? 'false' : 'true'}><img src={withBase(photo.src)} alt={photo.alt} width="1600" height="1000" loading={index === 0 ? 'eager' : 'lazy'} /></figure>)}
+          </div>
+          <div class="city-carousel__controls">
+            <button class="carousel-button" type="button" data-prev aria-label="Previous photo">←</button>
+            <div class="carousel-dots" aria-label="Choose photo">{cityPhotos.map((_, index) => <button class={index === 0 ? 'is-active' : ''} type="button" data-dot={index} aria-label={`Show photo ${index + 1}`}></button>)}</div>
+            <button class="carousel-button" type="button" data-next aria-label="Next photo">→</button>
+          </div>
+        </div>
+        <div class="city-copy">
+          <!-- TEXTO: 120–220 palavras. Fale de identidade, atrações, gastronomia/natureza/cultura
+               e informações úteis; evite transformar a home em um guia turístico extenso. -->
+          <p><strong>Replace this paragraph with an introduction to the host city.</strong> Highlight what makes the destination distinctive and welcoming for conference participants.</p>
+          <p>Use this second paragraph for two or three practical attractions or experiences attendees may enjoy before or after the conference.</p>
+          <a class="text-link" href={withBase(`/${edition.year}/attending/`)}>Plan your visit →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+     CALL FOR PAPERS — MAIN CONFERENCE
+     Este bloco apenas destaca o CFP da BRACIS na Home.
+     O conteúdo completo deve permanecer na página do evento.
+     ========================================================= -->
+  <section class="cfp-highlight">
+    <div class="container">
+      <div class="cfp-highlight__card">
+        <div class="cfp-highlight__content">
+          <p class="eyebrow">CALL FOR PAPERS</p>
+
+          <h2>Contribute to BRACIS {edition.year}</h2>
+
+          <p>
+            Submit your work to the Brazilian Conference on Intelligent Systems.
+            Explore the topics of interest, submission guidelines, decision process
+            and important dates for the main conference.
+          </p>
+        </div>
+
+        <div class="cfp-highlight__action">
+          <a
+            class="button button--primary"
+            href={withBase(`/${edition.year}/events/bracis/`)}
+          >
+            View Call for Papers
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sponsors-section section--alt" id="sponsors">
+    <div class="container">
+      <div class="section__heading"><p class="section-kicker">Partners</p><h2>Promotion, organization &amp; sponsors</h2><p><!-- LOGOS: SVG preferido ou PNG transparente 800×400 px, idealmente até 250 KB. Preserve proporção e respiro da marca. --></p></div>
+      <div class="sponsor-groups">
+        {sponsorGroups.map((group) => <section class={`sponsor-group sponsor-group--${group.size}`}><h3>{group.title}</h3><div class="sponsor-logo-grid">{group.logos.map((label) => <div class="sponsor-logo-placeholder" aria-label={label}>{label}</div>)}</div></section>)}
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+      const slides = [...carousel.querySelectorAll('[data-slide]')];
+      const dots = [...carousel.querySelectorAll('[data-dot]')];
+      let current = 0;
+      const show = (index) => {
+        current = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => { slide.classList.toggle('is-active', i === current); slide.setAttribute('aria-hidden', String(i !== current)); });
+        dots.forEach((dot, i) => dot.classList.toggle('is-active', i === current));
+      };
+      carousel.querySelector('[data-prev]')?.addEventListener('click', () => show(current - 1));
+      carousel.querySelector('[data-next]')?.addEventListener('click', () => show(current + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
+    });
+  </script>
+</EditionLayout>
