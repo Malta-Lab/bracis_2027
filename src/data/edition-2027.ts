@@ -15,7 +15,7 @@ export const edition2027 = {
      Mapa: o formato q=...&output=embed do Google Maps dispensa API key para este uso simples. */
   venueAddress: 'Avenida Ipiranga, 6681, Partenon — Porto Alegre, RS',
   venueDescription: 'Replace with a short description of the venue, accessibility, main facilities and why it is convenient for conference attendees. Recommended: 60–120 words.',
-  venuePhoto: '/assets/2027/venue-placeholder.svg',
+  venuePhoto: '/assets/2027/venue-pucrs.jpg',
   mapEmbedUrl: 'https://www.google.com/maps?q=PUCRS%2C%20Avenida%20Ipiranga%206681%2C%20Porto%20Alegre&output=embed',
 
   /* NOVA EDIÇÃO — COR DE DESTAQUE
